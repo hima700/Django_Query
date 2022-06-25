@@ -1,0 +1,22 @@
+{% extends 'blogs/start.html' %}
+{% block create %}{% endblock %}
+{% block content %}
+<a href="{% url 'blogs:index' %}">
+    <input type="button" value="Home">
+</a>
+{% if blog_list %}
+    {% for blog in blog_list %}
+        <article class="post">
+            <time class="date">
+                Published By: {{ blog.author }}
+                <br>
+                Published Date: {{ blog.published_date }}
+            </time>
+            <h2><a href="{% url 'blogs:view' pk=blog.pk %}">{{ blog.title }}</a></h2>
+            <p>{{ blog.text|linebreaksbr }}</p>
+        </article>
+    {% endfor %}
+{% else %}
+    <p>No Posts are available.</p>
+{% endif %}
+{% endblock %}

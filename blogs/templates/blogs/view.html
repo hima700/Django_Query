@@ -1,0 +1,19 @@
+{% extends 'blogs/start.html' %}
+{% block create %}{% endblock %}
+{% block content %}
+    <article class="post">
+        <time class="date">
+            Published By: {{ blog.author }}
+            <br>
+            Published Date: {{ blog.published_date }}
+        </time>
+        <h2>{{ blog.title }}</h2>
+        <a href="{% url 'blogs:update' pk=blog.pk %}">
+            <input type="button" value="Update/Edit the Post">
+        </a>
+        <a href="{% url 'blogs:index' %}">
+            <input type="button" value="Home">
+        </a>
+        <p>{{ blog.text|linebreaksbr }}</p>
+    </article>
+{% endblock %}

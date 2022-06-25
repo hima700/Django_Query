@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Blog</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    </head>
+    <body>
+        <header class="page-header">
+            <div class="container">
+                {% block create %}
+                <a href="{% url 'blogs:create' %}" class="top-menu">Create New Blog Post</a>
+                {% endblock %}
+                <h1><a href="/">Blog</a></h1>
+            </div>
+        </header>
+        <main class="container">
+            <div class="row">
+                <div class="col">
+                    {% block content %}
+                        {% if blog_list %}
+                            {% for blog in blog_list %}
+                                <article class="post">
+                                    <time class="date">
+                                        Published By: {{ blog.author }}
+                                        <br>
+                                        Published Date: {{ blog.published_date }}
+                                    </time>
+                                    <h2><a href="{% url 'blogs:view' pk=blog.pk %}">{{ blog.title }}</a></h2>
+                                    <p>{{ blog.text|linebreaksbr }}</p>
+                                </article>
+                            {% endfor %}
+                        {% else %}
+                            <p>No Posts are available.</p>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

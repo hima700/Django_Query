@@ -1,0 +1,29 @@
+{% extends 'blogs/start.html' %}
+{% block content %}
+{% if blog_list %}
+    <a href="{% url 'blogs:Filter' %}">
+        <input type="button" value="Filter by the word &quot;title&quot;">
+    </a>
+    <br>
+    <a href="{% url 'blogs:Order' %}">
+        <input type="button" value="Order by Newest Date">
+    </a>
+    <br>
+    <a href="{% url 'blogs:FOrder' %}">
+        <input type="button" value="Filter by the word &quot;title&quot; and ordered by name alphabetically">
+    </a>
+    {% for blog in blog_list %}
+        <article class="post">
+            <time class="date">
+                Published By: {{ blog.author }}
+                <br>
+                Published Date: {{ blog.published_date }}
+            </time>
+            <h2><a href="{% url 'blogs:view' pk=blog.pk %}">{{ blog.title }}</a></h2>
+            <p>{{ blog.text|linebreaksbr }}</p>
+        </article>
+    {% endfor %}
+{% else %}
+    <p>No Posts are available.</p>
+{% endif %}
+{% endblock %}

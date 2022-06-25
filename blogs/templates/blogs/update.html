@@ -1,0 +1,10 @@
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+    <a href="{% url 'blogs:delete' blog.id %}">
+        <input type="button" value="Delete">
+    </a>
+    <a href="{% url 'blogs:index' %}">
+        <input type="button" value="Home">
+    </a>
+</form>
